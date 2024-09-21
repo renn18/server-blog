@@ -63,7 +63,7 @@ const loginUser = async (req, res, next) => {
             return next(new HttpError('Invalid creadentials.', 422))
         }
 
-        const {_id: id, name} = user
+        const {id, name} = user
         const token = jwt.sign({id, name}, process.env.JWT_SECRET, {expiresIn: "1d"})
 
         res.status(200).json({token, id, name})
