@@ -1,6 +1,7 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model, isValidObjectId, default: mongoose} = require('mongoose')
 
 const userSchema = new Schema({
+    _id: {type: mongoose.SchemaTypes.ObjectId},
     name: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
