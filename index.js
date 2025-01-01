@@ -11,7 +11,15 @@ const {notFound, errorHandler} = require('./middleware/errorMiddleware')
 const app = express();
 app.use(express.json({extended: true}))
 app.use(express.urlencoded({extended: true}))
-app.use(cors({credentials: true, origin: "https://renn-blog.vercel.app/"}))
+const corsOptions = {
+  origin: 'https://renn-blog.vercel.app', // Ganti dengan origin frontend Anda!
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Metode HTTP yang diizinkan
+  credentials: true, // Izinkan cookie dan header otorisasi
+  optionsSuccessStatus: 204, // Beberapa browser membutuhkan ini untuk status 204
+  allowedHeaders: 'Content-Type,Authorization', // Header yang diizinkan
+};
+
+app.use(cors(corsOptions));
 app.use(upload())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
